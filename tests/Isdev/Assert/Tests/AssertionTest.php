@@ -8,18 +8,21 @@ class AssertionTest extends \PHPUnit_Framework_TestCase
 {
     public function testJsonStringMatchJsonString()
     {
+        Assertion::jsonStringMatchJsonString('null', 'null');
+        Assertion::jsonStringMatchJsonString('"foo"', '"foo"');
         Assertion::jsonStringMatchJsonString('{"id":2}', '{"id": 2}');
         Assertion::jsonStringMatchJsonString('{"id":2, "user": {"name": "Bob"}}', '{"id":2, "user": {"name": "Bob"}}');
         Assertion::jsonStringMatchJsonString('{"id":2, "user": "*"}', '{"id":2, "user": {"name": "Bob"}}');
         Assertion::jsonStringMatchJsonString('{"id":2, "user": {"name": "*"}}', '{"id":2, "user": {"name": "Bob"}}');
         Assertion::jsonStringMatchJsonString('[{"id":2, "user": {"name": "*"}}]', '[{"id":2, "user": {"name": "Bob"}}]');
+        Assertion::jsonStringMatchJsonString('{"foo":{"foo": {"foo": 1}}}', '{"foo":{"foo": {"foo": 1}}}');
         Assertion::jsonStringMatchJsonString('{"title": "test", "id":2}', '{"id":2, "title": "test"}');
         Assertion::jsonStringMatchJsonString('{"id":"*"}', '{"id": 2}');
         Assertion::jsonStringMatchJsonString('[{"id":2}, {"id":3}]', '[{"id":2}, {"id":3}]');
     }
 
     /**
-     * @expectedException \Isdev\Assert\Exception\AssertionJsonMatchFailedException
+     * @expectedException \Isdev\Assert\Exception\AssertionException
      */
     public function testJsonStringMatchJsonStringFailUndefinedProperty()
     {
@@ -27,7 +30,7 @@ class AssertionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Isdev\Assert\Exception\AssertionJsonMatchFailedException
+     * @expectedException \Isdev\Assert\Exception\AssertionException
      */
     public function testJsonStringMatchJsonStringFailInvalidProperty()
     {
@@ -35,7 +38,7 @@ class AssertionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Isdev\Assert\Exception\AssertionJsonMatchFailedException
+     * @expectedException \Isdev\Assert\Exception\AssertionException
      */
     public function testJsonStringMatchJsonStringFailUnexpectedProperty()
     {
@@ -43,7 +46,7 @@ class AssertionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \Isdev\Assert\Exception\AssertionJsonMatchFailedException
+     * @expectedException \Isdev\Assert\Exception\AssertionException
      */
     public function testJsonStringMatchJsonStringFailIncorrectArrayLength()
     {
