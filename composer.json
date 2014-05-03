@@ -11,7 +11,7 @@
     "keywords": ["assert", "assertion"],
     "autoload": {
         "psr-0": {
-            "Assert": "lib/"
+            "Isdev": "lib/"
         }
     },
     "require": {
