@@ -13,9 +13,9 @@ class Matcher
 
     public static function matchArrays(array $expected, $actual)
     {
-        if (!is_array($actual) || count($expected) !== count($actual)) {
-            self::fail($expected, $actual, 'Array length does not match the expected.');
-        }
+        // if (!is_array($actual) || count($expected) !== count($actual)) {
+        //     self::fail($expected, $actual, 'Array length does not match the expected.');
+        // }
         foreach ($expected as $k => $v) {
             if (!isset($actual[$k])) {
                 self::fail($v , 'undefined', "Property \"$k\" is undefined");
